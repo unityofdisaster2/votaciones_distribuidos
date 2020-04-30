@@ -6,3 +6,6 @@ origen.txt
 *.o
 gen
 destino.txt
+registros.txt
+clientConf
+servConf
