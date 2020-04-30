@@ -1,0 +1,21 @@
+ejercicio1:
+
+* Con 70 millones de registros se necesitaria un espacio de:
+    34 * 70,000,000 = 2,380,000,000 bytes = 2,296.74 MB = 2.2165 GB
+* Es posible almacernarlo en disco o en una memoria USB, en un archivo virtual de la ram, no 
+    es tan conveniente.
+
+
+
+ejercicio2:
+
+tiempos
+
+--------------------------------------------
+|registros|  real    | user     | sys      |
+|7000     | 0m0.063s | 0m0.020s | 0m0.043s |
+|70000    | 0m0.523s | 0m0.179s | 0m0.342s |
+|700000   | 0m5.065s | 0m1.525s | 0m3.227s | 
+|7000000  | 0m51.838s| 0m15.752s| 0m33.764s|
+--------------------------------------------
+
