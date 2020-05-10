@@ -19,9 +19,9 @@ struct mensaje * Respuesta::getRequest(){
 
     socketLocal->recibe(bid);
 
-    // printf("Solicitud recibida de:\n");
-    // printf("direccion: %s\n",bid.obtieneDireccion());
-    // printf("puerto: %d\n",bid.obtienePuerto());
+    printf("Solicitud recibida de:\n");
+    printf("direccion: %s\n",bid.obtieneDireccion());
+    printf("puerto: %d\n",bid.obtienePuerto());
 
     return (struct mensaje*) bid.obtieneDatos();
 }

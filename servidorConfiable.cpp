@@ -71,8 +71,7 @@ int main(int argc, char const *argv[])
                 tiempo.tv_sec = 0;
                 tiempo.tv_usec = 0;
             }
-            printf("%ld %ld\n",tiempo.tv_sec, tiempo.tv_usec);
-            resp.sendReply((char*)&codigo, sizeof(codigo));
+            resp.sendReply((char*)&tiempo, sizeof(tiempo));
             
         }
     }

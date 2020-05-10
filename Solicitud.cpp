@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdio.h>
 
+struct mensaje mensaje_recibido;
+
 Solicitud::Solicitud(){
     socketLocal =  new SocketDatagrama(0);
 }
@@ -39,9 +41,11 @@ char * Solicitud::doOperation(char *IP, int puerto, int operId, char *arguments)
         printf("se recibe respuesta de servidor\n");
         printf("direccion: %s\n",recibido.obtieneDireccion());
         printf("puerto: %d\n",recibido.obtienePuerto());
-        struct mensaje *aux;
-        aux = (struct mensaje *)recibido.obtieneDatos();
-        return (char*)aux->arguments;
+        //struct mensaje *aux;
+        memcpy(&mensaje_recibido, recibido.obtieneDatos(), sizeof(mensaje));
+
+        //aux = (struct mensaje *)recibido.obtieneDatos();
+        return (char*)mensaje_recibido.arguments;
     }else{
         return NULL;
     }

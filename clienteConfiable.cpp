@@ -19,8 +19,8 @@ int main(int argc, char const *argv[])
     int pto = atoi(argv[2]);
     int n_registros = atoi(argv[4]);
     int origen;
-    //struct timeval acuse;
-    int acuse;
+    struct timeval acuse;
+    // int acuse;
     if((origen = open(argv[3], O_RDONLY)) == -1){
         perror("error al abrir archivo\n");
         exit(1);
@@ -32,15 +32,11 @@ int main(int argc, char const *argv[])
     for(int i = 0; i < n_registros; i++){
         read(origen,registro,TAMREGISTRO);
         memcpy(&acuse, sol.doOperation(ip, pto, 1, (char*)&registro), sizeof(acuse));
-        printf("acuse: %d\n",acuse);
-        // if(acuse.tv_sec == 0 && acuse.tv_sec == 0){
-        //     printf("ya se ha enviado un voto desde este numero\n");
-        // }else{
-        //     printf("se ha registrado el voto\n");
-        // }
-        // printf("%ld %ld\n",acuse.tv_sec,acuse.tv_usec);
-        // gettimeofday(&acuse,NULL);
-        // printf("%ld %ld\n",acuse.tv_sec,acuse.tv_usec);
+        if(acuse.tv_sec == 0 && acuse.tv_sec == 0){
+            printf("ya se ha enviado un voto desde este numero\n");
+        }else{
+            printf("se ha registrado el voto\n");
+        }
     }
 
     close(origen);
