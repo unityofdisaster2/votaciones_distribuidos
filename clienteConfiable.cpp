@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-
+#include <sys/time.h>
 
 #define TAMREGISTRO 34
 
@@ -19,21 +19,28 @@ int main(int argc, char const *argv[])
     int pto = atoi(argv[2]);
     int n_registros = atoi(argv[4]);
     int origen;
+    //struct timeval acuse;
+    int acuse;
     if((origen = open(argv[3], O_RDONLY)) == -1){
         perror("error al abrir archivo\n");
         exit(1);
     }
 
+    
     Solicitud sol = Solicitud();
-    int acuse;
     char registro[TAMREGISTRO];
-    int offset = TAMREGISTRO;
     for(int i = 0; i < n_registros; i++){
         read(origen,registro,TAMREGISTRO);
-        memcpy(&acuse, sol.doOperation(ip, pto, 1, (char*)&registro), sizeof(int));
-        if(acuse == 1){
-            printf("servidor ha guardado registro\n");
-        }
+        memcpy(&acuse, sol.doOperation(ip, pto, 1, (char*)&registro), sizeof(acuse));
+        printf("acuse: %d\n",acuse);
+        // if(acuse.tv_sec == 0 && acuse.tv_sec == 0){
+        //     printf("ya se ha enviado un voto desde este numero\n");
+        // }else{
+        //     printf("se ha registrado el voto\n");
+        // }
+        // printf("%ld %ld\n",acuse.tv_sec,acuse.tv_usec);
+        // gettimeofday(&acuse,NULL);
+        // printf("%ld %ld\n",acuse.tv_sec,acuse.tv_usec);
     }
 
     close(origen);

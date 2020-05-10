@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
     PaqueteDatagrama p = PaqueteDatagrama(TAMREGISTRO);
 
     servidor.recibe(p);
-
+    printf("registro recibido...\n");
     char buffer[TAMREGISTRO];
 
     memcpy(buffer, p.obtieneDatos(), sizeof(char)*34);
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
     }
     int escritura;
     escritura = write(destino,buffer,TAMREGISTRO);
-
+    printf("se guarda registro en %s\n",argv[2]);
 
     close(destino);
     

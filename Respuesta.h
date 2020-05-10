@@ -6,7 +6,7 @@ class Respuesta{
     public:
         Respuesta(int pl);
         struct mensaje *getRequest(void);
-        void sendReply(char *respuesta);
+        void sendReply(char *respuesta, unsigned int);
     private:
         SocketDatagrama *socketLocal;
 };

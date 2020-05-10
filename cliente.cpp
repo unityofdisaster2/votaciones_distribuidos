@@ -30,6 +30,7 @@ int main(int argc, char const *argv[])
     PaqueteDatagrama p = PaqueteDatagrama((char*)&buffer,sizeof(buffer),ip,puerto);
 
     cliente.envia(p);
+    printf("registro enviado al servidor\n");
 
     close(origen);
 
