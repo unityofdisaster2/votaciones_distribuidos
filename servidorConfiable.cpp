@@ -9,7 +9,7 @@
 #include <string>
 //#include<bits/stdc++.h>
 #include <algorithm>
-
+#include "TrieUtil.h"
 
 using namespace std;
 struct registro{
@@ -31,7 +31,10 @@ int main(int argc, char const *argv[])
     int pto = atoi(argv[1]);
     int destino;
     struct timeval tiempo;
-    vector<string> vec_celulares;
+    //vector<string> vec_celulares;
+
+    struct TrieNode *root = getNode();
+
     struct tm *newtime;
     struct registro reg_individual;
     char time_string[40];
@@ -51,23 +54,24 @@ int main(int argc, char const *argv[])
         gettimeofday(&tiempo,NULL);
         newtime = localtime(&tiempo.tv_sec);
 
+
         if(msj.operationId == 1){
             // se guarda el registro recibido en una estructura
             memcpy(&reg_individual,msj.arguments,34);
             //printf("%s\n",reg_individual.celular);
+            
+            string auxString(reg_individual.celular);
             // se verifica que el numero de celular no este repetido
-            if(!binary_search(vec_celulares.begin(),vec_celulares.end(), reg_individual.celular)){
+            if(!search(root, auxString)){
                 strftime (time_string, sizeof (time_string), "%Y-%m-%d %H:%M:%S", newtime);
-                //printf("%s\n",time_string);
-                vec_celulares.push_back(reg_individual.celular);
+
                 write(destino, msj.arguments, 34);
                 write(destino,time_string,20);
                 fsync(destino);
-                // se ordena el vector de numeros celulares para mantener la consistencia en la 
-                // busqueda binaria
-                sort(vec_celulares.begin(), vec_celulares.end());
+                // se inserta el numero telefonico en el arbol
+                insert(root,auxString);
             }else{
-                //printf("numero repetido\n");
+                printf("numero repetido\n");
                 tiempo.tv_sec = 0;
                 tiempo.tv_usec = 0;
             }
