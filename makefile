@@ -3,7 +3,7 @@
 construir: gen servidor cliente clienteConfiable servidorConfiable
 
 clienteConfiable: clienteConfiable.cpp SocketDatagrama.o PaqueteDatagrama.o Solicitud.o
-	g++ -g clienteConfiable.cpp SocketDatagrama.o PaqueteDatagrama.o Solicitud.o -o clientConf
+	g++ -g clienteConfiable.cpp SocketDatagrama.o PaqueteDatagrama.o Solicitud.o -o clientConf -lpthread
 
 servidorConfiable: servidorConfiable.cpp SocketDatagrama.o PaqueteDatagrama.o Respuesta.o TrieUtil.o
 	g++ -g servidorConfiable.cpp SocketDatagrama.o PaqueteDatagrama.o Respuesta.o TrieUtil.o -o servConf

@@ -5,10 +5,11 @@ origen.txt
 *.pdf
 *.o
 gen
-destino.txt
 registros.txt
 clientConf
 servConf
 /votaciones_parte*
 .registros.txt.swp
 respuestas.txt
+destino*
+.vscode/
