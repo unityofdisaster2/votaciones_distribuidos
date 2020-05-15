@@ -8,11 +8,13 @@ Solicitud::Solicitud(){
     socketLocal =  new SocketDatagrama(0);
 }
 
-char * Solicitud::doOperation(char *IP, int puerto, int operId, char *arguments){
+char * apuntador = NULL;
+
+char * Solicitud::doOperation(char *IP, int puerto, int operId, char *arguments, int tam){
     
     struct mensaje msj;
     //memcpy(msj.arguments, arguments, sizeof(arguments));
-    memcpy(msj.arguments, arguments, 34);
+    memcpy(msj.arguments, arguments, tam);
     msj.operationId = operId;
     msj.requestId = 0;
     msj.messageType = 0;
@@ -47,7 +49,7 @@ char * Solicitud::doOperation(char *IP, int puerto, int operId, char *arguments)
         //aux = (struct mensaje *)recibido.obtieneDatos();
         return (char*)mensaje_recibido.arguments;
     }else{
-        return NULL;
+        return apuntador;
     }
 }
 

@@ -6,7 +6,7 @@
 class Solicitud{
     public:
         Solicitud();
-        char * doOperation(char *IP, int puerto, int operationId, char *arguments);
+        char * doOperation(char *IP, int puerto, int operationId, char *arguments, int tam);
     private:
         SocketDatagrama *socketLocal;
 };

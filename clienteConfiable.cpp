@@ -19,7 +19,7 @@ struct str_registro{
 
 void enviar(const char* ip, int puerto, struct str_registro reg, Solicitud solicitud){
     struct timeval acuse;
-    memcpy(&acuse, solicitud.doOperation((char*)ip, puerto, 1, (char*)&reg), sizeof(acuse));
+    memcpy(&acuse, solicitud.doOperation((char*)ip, puerto, 1, (char*)&reg,sizeof(reg)), sizeof(acuse));
     if(acuse.tv_sec == 0 && acuse.tv_sec == 0){
         printf("ya se ha enviado un voto desde este numero\n");
     }else{
