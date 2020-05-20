@@ -71,7 +71,14 @@ int main(int argc, char const *argv[])
                 
                 // se inserta el numero telefonico en el arbol
                 memcpy(&tiempo, sol.doOperation((char*)argv[3],atoi(argv[4]),2,(char*)&codigo,sizeof(int)), sizeof(tiempo));
-                
+                if(tiempo.tv_sec == '\0'){
+                    printf("no se pudo conectar al servidor de tiempo\n");
+                    tiempo.tv_sec = -1;
+                    tiempo.tv_usec = -1;
+                    resp.sendReply((char*)&tiempo, sizeof(tiempo));
+                    continue;
+                }
+                newTime = localtime(&tiempo.tv_sec);
                 //formateo de timestamp
                 strftime (time_string, sizeof (time_string),"%H:%M:%S", newTime);
                 cadena = string(time_string) + "." + to_string(tiempo.tv_usec); 
@@ -88,6 +95,7 @@ int main(int argc, char const *argv[])
                 tiempo.tv_sec = 0;
                 tiempo.tv_usec = 0;
             }
+            
             resp.sendReply((char*)&tiempo, sizeof(tiempo));
             
         }

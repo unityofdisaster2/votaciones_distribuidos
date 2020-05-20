@@ -8,7 +8,7 @@ Solicitud::Solicitud(){
     socketLocal =  new SocketDatagrama(0);
 }
 
-char * apuntador = NULL;
+char mensaje_error [4000]= {'\0'};
 
 char * Solicitud::doOperation(char *IP, int puerto, int operId, char *arguments, int tam){
     
@@ -47,9 +47,9 @@ char * Solicitud::doOperation(char *IP, int puerto, int operId, char *arguments,
         memcpy(&mensaje_recibido, recibido.obtieneDatos(), sizeof(mensaje));
 
         //aux = (struct mensaje *)recibido.obtieneDatos();
-        return (char*)mensaje_recibido.arguments;
+        return mensaje_recibido.arguments;
     }else{
-        return apuntador;
+        return mensaje_error;
     }
 }
 
